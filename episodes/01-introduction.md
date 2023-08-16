@@ -55,43 +55,6 @@ such as R or Python.
 
 Many web applications (including WordPress and ecommerce sites like Amazon) run on a SQL (relational) database. Understanding SQL is the first step in eventually building custom web applications that can serve data to users.
 
-## Why are people working in library- and information-related roles well suited to SQL?
-
-Library work is about information management. As library workers, we help sort and organise
-information, and we help people find information. Most of us go through mediated queries
-to help people find the information they need, e.g., we assist with or conduct a search via
-a library catalogue. With SQL, you can directly construct your database queries
-without the constraints (e.g., field name or search limitations) imposed by
-a mediated search interface. Library workers are good at searching information – constructing queries using SQL is a different and more
-direct way of finding information.
-
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-## What are some of the uses for SQL in libraries?
-
-- You can use SQL to make macro or large scale changes to metadata records in library databases, for instance, updating journal names so that they are consistent or normalised throughout the database.
-
-- For situations where you have to interact with database administrators in your library or wider organisation, you can learn the fundamentals of SQL to become more fluent in the terminology.
-
-- Because SQL querying is similar to natural language queries, you can use it to organise a variety of projects (e.g. programme evaluation) and ask questions of the data before going on to use other data analysis tools.
-
-- You can use SQL to query your library database and explore new views that are not necessarily provided via library systems patron facing interfaces.
-
-- SQL can be used to keep an inventory of items, for instance, for a library's makerspace, or it can be used to track licenses for journals.
-
-- For projects involving migrating and cleaning data from one system to another, SQL can be a handy tool.
-
-- With spreadsheets of data scattered throughout folders, SQL can be a useful tool for connecting this data and bringing it together in a database or central data warehouse where it can be accessible to different roles in the library and queried in one place.
-
-- It can also help with initial exposure with interacting with a system, in preparation for interacting with a application programming interface or API later on.
-
-In addition, you can read about these two perspectives:
-
-- [An Introduction to SQL for Librarians](https://ruthtillman.com/an-introduction-to-sql-for-librarians/)
-
-- [Data Science is Different Now: Learn SQL](https://vickiboykis.com/2019/02/13/data-science-is-different-now/)
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Database Management Systems
 
@@ -125,41 +88,37 @@ The steps for adding data from a CSV file are:
 
 ## Dataset Description
 
-The data we will be using consists of 5 csv files that contain tables of article titles, journals, languages, licenses, and publishers. The information in these tables are from a sample of 51 different journals published during 2015.
+The data we will be using consists 4 tables of movie or series titles. 
 
-**articles**
+**filmsAndSeries**
 
-- Contains individual article Titles and the associated citations and metadata
-- (16 fields, 1001 records)
-- Field names: `id`, `Title`, `Authors`, `DOI`, `URL`, `Subjects`, `ISSNs`, `Citation`, `LanguageID`, `LicenseID`, `Author_Count`, `First_Author`, `Citation_Count`, `Day`, `Month`, `Year`
+- Contains titles and metadataon movies and series from IMDB
+- (13 fields, 5850 records)
+- Field names: "id" , "title", "type", "description", "release_year", "age_certification", "runtime", "seasons", "imdb_id", "imdb_score", "imdb_votes", "tmdb_popularity", "tmdb_score"
 
-**journals**
+**certification**
 
-- Contains various journal Titles and associated metadata. The table also associates Journal Titles with ISSN numbers that are then referenced in the 'articles' table by the `ISSNs` field.
-- (5 fields, 51 records)
-- Field names: `id`, `ISSN-L`,`ISSNs`, `PublisherID`, `Journal_Title`
+- Contains the various certification types.
+- (2 fields, 12 records)
+- Field names: `id`, `certification`
 
-**languages**
+**productionCountries**
 
-- ID table which associates language codes with id numbers. These id numbers are then referenced in the 'articles' table by the `LanguageID` field.
-- (2 fields, 4 records)
-- Field names: `id`, `Language`
+- country table which associates country codes with netflixid. 
+- (2 fields, 94 records)
+- Field names: `NetflixId`, `production_country`
 
-**licenses**
+**types**
 
-- ID table which associates License codes with id numbers. These id numbers are then referenced in the 'articles' table by the `LicenseID` field.
-- (2 fields, 4 records)
-- Field names: `id`, `Licence`
+- Table which associates genres with id numbers. 
+- (2 fields, 207 records)
+- Field names: `NetflixId`, `Genre`
 
-**publishers**
 
-- ID table which associates Publisher names with id numbers. These id numbers are then referenced in the 'journals' table by the `PublisherID` field.
-- (2 fields, 6 records)
-- Field names: `id`, `Publisher`
 
 ## A Note About Data Types
 
-The main data types that are used in doaj-article-sample database are `INTEGER` and `TEXT` which define what value the table column can hold.
+The main data types that are used in imdb database are `INTEGER` and `TEXT` which define what value the table column can hold.
 
 ## SQL Data Type Quick Reference
 
