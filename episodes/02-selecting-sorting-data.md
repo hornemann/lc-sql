@@ -26,13 +26,13 @@ A query is a question or request for data. For example, "How many journals does 
 
 ## Writing my first query
 
-Let's start by opening DB Browser for SQLite and the doaj-article-sample database (see Setup). Choose `Browse Data` and the `articles` table. The articles table contains columns or fields such as `Title`, `Authors`, `DOI`, `URL`, etc.
+Let's start by opening DB Browser for SQLite and the imdb database (see Setup). Choose `Browse Data` and the `moviesAndSeries` table. The moviesAndSeries table contains columns or fields such as `title`, `type`, `description`, `release_year`, etc.
 
-Let's write a SQL query that selects only the `Title` column from the `articles` table.
+Let's write a SQL query that selects only the `title` column from the `filsAndSeries` table.
 
 ```sql
 SELECT title
-FROM articles;
+FROM filmsAndSeries;
 ```
 
 ## Capitalization and good style
@@ -42,90 +42,90 @@ In the first query above, we have capitalized the words `SELECT` and `FROM` beca
 Example:
 
 ```
-SELECT Title, Authors, ISSNs, Year
-FROM Articles;
+SELECT title
+FROM filmsAndSeries;
 ```
 
 instead of
 
 ```sql
-SELECT Title, authors, ISSNs, Year
-FROM articles;
+SELECT Title
+FROM filmsandseries;
 ```
 
 If we want more information, we can add a new column to the list of fields right after `SELECT`:
 
 ```sql
-SELECT Title, Authors, ISSNs, Year, DOI
-FROM articles;
+SELECT Title, Year
+FROM filmsAndSeries;
 ```
 
 Or we can select all of the columns in a table using the wildcard `*`.
 
 ```sql
 SELECT *
-FROM articles;
+FROM filmsAndSeries;
 ```
 
 ## Unique values
 
-There may be a situation when you need to retrieve unique records and not multiple duplicate records. The SQL `DISTINCT` keyword is used after `SELECT` to eliminate duplicate records and fetch only unique records. Let's return all of the unique `ISSNs` in a SQL query.
+There may be a situation when you need to retrieve unique records and not multiple duplicate records. The SQL `DISTINCT` keyword is used after `SELECT` to eliminate duplicate records and fetch only unique records. Let's return all of the unique titles in a SQL query.
 
 ```sql
-SELECT DISTINCT ISSNs
-FROM articles;
+SELECT DISTINCT title
+FROM filmsAndDatabases;
 ```
 
 Note, some database systems require a semicolon `;` after each SQL statement. If we select more than one column, then the distinct pairs of values are returned.
 
 ```sql
-SELECT DISTINCT ISSNs, Day, Month, Year
-FROM articles;
+SELECT DISTINCT title, release_year
+FROM filmsAndSeries;
 ```
 
 ## Sorting
 
-We can also sort the results of our queries by using the keyword `ORDER BY`. Let's create a query that sorts the articles table in ascending order by ISSNs using the `ASC` keyword in conjunction with `ORDER BY`.
+We can also sort the results of our queries by using the keyword `ORDER BY`. Let's create a query that sorts the articles table in ascending order by release_year using the `ASC` keyword in conjunction with `ORDER BY`.
 
 ```sql
 SELECT *
-FROM articles
-ORDER BY ISSNs ASC;
+FROM filmsAndSeries
+ORDER BY release_year ASC;
 ```
 
-The keyword `ASC` tells us to order it in ascending order. Instead, we can use `DESC` to get the descending order sorting by `First_Author`.
+The keyword `ASC` tells us to order it in ascending order. Instead, we can use `DESC` to get the descending order sorting by `tmdb_score`.
 
 ```sql
 SELECT *
-FROM articles
-ORDER BY First_Author DESC;
+FROM filmsAndSeries
+ORDER BY tmdb_score DESC;
 ```
 
 `ASC` is the default, so by omitting `ASC` or `DESC`, SQLite will sort ascending (ASC).
 
-We can also sort on several fields at once, in different directions. For example, we can order by `ISSNs` descending and then `First_Author` ascending in the same query.
+We can also sort on several fields at once, in different directions. For example, we can order by `tmdb_score` descending and then `release_year` ascending in the same query.
 
 ```sql
 SELECT *
-FROM articles
-ORDER BY ISSNs DESC, First_Author ASC;
+FROM filmsAndSeries
+ORDER BY tmdb_score DESC, release_year ASC;
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Challenge
 
-Write a query that returns `Title`, `First_Author`, `ISSNs` and `Citation_Count` from
-the articles table, ordered by the top cited article and alphabetically by title.
+Write a query that returns `Title`, `imdb_score`, `release_year` and `imdb_votes` from
+the filmsAndSeries table, ordered by the top number of votes and alphabetically by title.
 
 :::::::::::::::  solution
 
 ## Solution
 
 ```sql
-SELECT Title, First_Author, ISSNs, Citation_Count
-FROM articles
-ORDER BY Citation_Count DESC, Title ASC;
+SELECT title, imdb_score, release_year, imdb_votes
+FROM filmsAndSeries
+ORDER BY imdb_votes DESC, title ASC;
 ```
 
 :::::::::::::::::::::::::
