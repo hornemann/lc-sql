@@ -22,13 +22,13 @@ exercises: 0
 Let's say we had the following query:
 
 ```sql
-SELECT Title, Authors
-FROM articles
-WHERE ISSNs = '2067-2764|2247-6202'
-ORDER BY First_Author ASC;
+SELECT title, description
+FROM filmsAndSeries
+WHERE type = 'SHOW'
+ORDER BY release_year;
 ```
 
-What is interesting to note about this query is that we don't necessarily have to display the `First_Author` column in our results in order to sort by it.
+What is interesting to note about this query is that we don't necessarily have to display the `release_year` column in our results in order to sort by it.
 
 We can do this because sorting occurs earlier in the computational pipeline than field selection.
 
@@ -55,16 +55,16 @@ Consider the following query:
 
 ```sql
 SELECT *
-FROM articles
-WHERE (ISSNs = '2076-0787') OR (ISSNs = '2077-1444') OR (ISSNs = '2067-2764|2247-6202');
+FROM filmsAndSeries
+WHERE release_year = 1989 OR release_year = 1993 OR release_year = 1991 ;
 ```
 
 SQL offers the flexibility of iteratively adding new conditions but you may reach a point where the query is difficult to read and inefficient. For instance, we can use `IN` to improve the query and make it more readable:
 
 ```sql
 SELECT *
-FROM articles
-WHERE (ISSNs IN ('2076-0787', '2077-1444', '2067-2764|2247-6202'));
+FROM filmsAndSeries
+WHERE release_years IN (1989, 1993, 1991);
 ```
 
 We started with something simple, then added more clauses one by one, testing
@@ -73,25 +73,17 @@ their effects as we went along.  For complex queries, this is a good strategy, t
 When the queries become more complex, it can be useful to add comments to express to yourself, or to others, what you are doing with your query. Comments help explain the logic of a section and provide context for anyone reading the query. It's essentially a way of making notes within your SQL. In SQL, comments begin using <code class="language-plaintext highlighter-rouge">\--</code> and end at the end of the line. To mark a whole paragraph as a comment, you can enclose it with the characters /\* and \*/. For example, a commented version of the above query can be written as:
 
 ```
-/*In this section, even though JOINS (see link below this code block) are not introduced until Episode 6, we want to give an example how to
-join multiple tables becasue they represent a good example of using comments in SQL to explain more complex queries.*/
+/*This simple query gives us all fields from all the movies and series  released in the years 1989, 1991 or 1993.
+The results will not be sorted*/
 
--- First we mention all the fields we want to display
-SELECT articles.Title, articles.First_Author, journals.Journal_Title, publishers.Publisher
--- from the first table
-FROM articles
--- and join it with the second table.
-JOIN journals
--- The related attributes are:
-ON articles.ISSNs = journals.ISSNs
--- We want to join a third table,
-JOIN publishers
--- the related attributes are:
-ON publishers.id = journals.PublisherId;
+-- We specify, that we want to see all the fields
+SELECT *
+-- from the table filmsAndSeries
+FROM filmsAndSeries
+-- we specify the years we want, using the IN operator
+WHERE release_year IN (1989, 1993, 1991);
 ```
 
-To see the introduction and explanation of JOINS, please click to [Episode 6](06-joins-aliases.md).
-{: .sql}
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
