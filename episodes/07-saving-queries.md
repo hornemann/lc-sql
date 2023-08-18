@@ -26,26 +26,26 @@ to do this: views. Views are queries saved in the database. You query it as a
 
 Creating a view from a query requires you to add `CREATE VIEW viewname AS`
 before the query itself. For example, if we want to save the query giving
-the number of journals in a view, we can write:
+the number of productions from each country in a view, we can write:
 
 ```sql
-CREATE VIEW journal_counts AS
-SELECT ISSNs, COUNT(*)
-FROM articles
-GROUP BY ISSNs;
+CREATE VIEW productio_counts AS
+SELECT productionCountry, COUNT(*)
+FROM productionCountry
+GROUP BY productionCountry;
 ```
 
 Now, we will be able to access these results with a much shorter notation:
 
 ```sql
 SELECT *
-FROM journal_counts;
+FROM production_count;
 ```
 
 Assuming we do not need this view anymore, we can remove it from the database.
 
 ```sql
-DROP VIEW journal_counts;
+DROP VIEW production_counts;
 ```
 
 In DBBrowser for SQLite, you can also create a view from any query by omitting
