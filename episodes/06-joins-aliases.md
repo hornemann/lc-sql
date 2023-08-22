@@ -34,10 +34,6 @@ ON filmsAndSeries.id  = genres.id;
 
 `ON` is similar to `WHERE`, it filters things out according to a test condition.  We use the `table.colname` format to tell the SQL manager what column in which table we are referring to.
 
-We can represent `a LEFT` join using the following diagram.
-
-![](fig/left-join-articles-journals_40.png){alt='Join Diagram for Example'}
-
 Alternatively, we can use the word `USING`, as a short-hand.  In this case we are telling DB Browser that we want to combine `filmsAndSeries` with `genres` and that the common column is `id`.
 
 ```sql
