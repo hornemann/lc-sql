@@ -71,7 +71,7 @@ CREATE VIEW scores_by_country AS
 SELECT productionCountries.Country, AVG(filmsAndSeries.imdb_score) as score
 FROM productionCountries
 JOIN filmsAndSeries
-ON id = id
+USING id 
 GROUP BY Country
 ORDER BY score DESC
 ```
