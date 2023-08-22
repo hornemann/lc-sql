@@ -29,7 +29,7 @@ before the query itself. For example, if we want to save the query giving
 the number of productions from each country in a view, we can write:
 
 ```sql
-CREATE VIEW productio_counts AS
+CREATE VIEW production_counts AS
 SELECT productionCountry, COUNT(*)
 FROM productionCountry
 GROUP BY productionCountry;
