@@ -58,22 +58,22 @@ under the Database Structure tab.
 
 ## Challenge
 
-Write a `CREATE VIEW` query that `JOINS` the `articles` table with the
-`journals` table on `ISSNs` and returns the `COUNT` of article records
-grouped by the `Journal_Title` in `DESC` order.
+Write a `CREATE VIEW` query that `JOINS` the `filmsAndSeries` table with the
+`productionCountries` table on `id` and returns the `AVG` of imdb_score
+grouped by the `Country` in `DESC` order.
 
 :::::::::::::::  solution
 
 ## Solution
 
 ```sql
-CREATE VIEW journal_counts AS
-SELECT journals.Journal_Title, COUNT(*)
-FROM articles
-JOIN journals
-ON articles.ISSNs = journals.ISSNs
-GROUP BY Journal_Title
-ORDER BY COUNT(*) DESC
+CREATE VIEW scores_by_country AS
+SELECT productionCountries.Country, AVG(filmsAndSeries.imdb_score) as score
+FROM productionCountries
+JOIN filmsAndSeries
+ON id = id
+GROUP BY Country
+ORDER BY score DESC
 ```
 
 :::::::::::::::::::::::::
