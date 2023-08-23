@@ -30,16 +30,18 @@ they are actually single commands.
 The first one creates a new table;
 its arguments are the names and types of the table's columns.
 For example,
-the following statement creates the table `journals`:
+the following statement creates the table `filmsAndSeries`:
 
 ```sql
-CREATE TABLE journals(id text, ISSN-L text, ISSNs text, PublisherId text, Journal_Title text);
+
+CREATE TABLE "filmsAndSeries" (	"id"	TEXT,	"title"	TEXT,	"type"	TEXT,	"description"	TEXT,	"release_year"	INTEGER,	"age_certification"	TEXT,	"runtime"	INTEGER,	"seasons"	TEXT,	"imdb_score"	REAL,
+  "imdb_votes"	INTEGER,	"tmdb_popularity"	REAL,	"tmdb_score"	REAL)
 ```
 
 We can get rid of one of our tables using:
 
 ```sql
-DROP TABLE journals;
+DROP TABLE filmsAndSeries;
 ```
 
 Be very careful when doing this:
@@ -51,17 +53,23 @@ We talked about data types earlier [in Introduction to SQL: SQL Data Type Quick 
 When we create a table,
 we can specify several kinds of constraints on its columns.
 For example,
-a better definition for the `journals` table would be:
+a better definition for the `filmsAndSeries` table would be:
 
 ```sql
-CREATE TABLE "journals" (
-	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	"ISSN-L"	TEXT,
-	"ISSNs"	TEXT,
-	"PublisherId"	INTEGER,
-	"Journal_Title"	TEXT,
-	CONSTRAINT "PublisherId" FOREIGN KEY("PublisherId") REFERENCES "publishers"("id") 
-);
+CREATE TABLE "filmsAndSeries" (
+	"id"	TEXT NOT NULL PRIMARY KEY,
+	"title"	TEXT,
+	"type"	TEXT,
+	"description"	TEXT,
+	"release_year"	INTEGER,
+	"age_certification"	TEXT,
+	"runtime"	INTEGER,
+	"seasons"	TEXT,
+	"imdb_score"	REAL,
+	"imdb_votes"	INTEGER,
+	"tmdb_popularity"	REAL,
+	"tmdb_score"	REAL,
+)
 ```
 
 Once again,
@@ -73,20 +81,24 @@ Once tables have been created,
 we can add, change, and remove records using our other set of commands,
 `INSERT`, `UPDATE`, and `DELETE`.
 
-Here is an example of inserting rows into the `journals` table:
+Here is an example of inserting rows into the `filmsAndSeries` table:
 
 ```sql
-INSERT INTO "journals" VALUES (1,'2077-0472','2077-0472',2,'Agriculture');
-INSERT INTO "journals" VALUES (2,'2073-4395','2073-4395',2,'Agronomy');
-INSERT INTO "journals" VALUES (3,'2076-2616','2076-2616',2,'Animals');
+
+INSERT INTO "filmsAndSeries" VALUES ("tm84618",  "Taxi Driver",	"MVIE",	"A mentally unstable Vietnam War...",	        1976,	"R",	    114,,	    8.2,	808582,     40.965,	8.179)
+INSERT INTO "filmsAndSeries" VALUES ("tm154986",	"Deliverance",	"MOVIE",	"Intent on seeing the Cahulawassee...",	      1972,	"R"	      109,,	    7.7,	107673,     10.01,	7.3)
+INSERT INTO "filmsAndSeries" VALUES ("ts22164",  "Monty Python's Flying Circus",	"SHOW",	"A British sketch comedy...",	  1969,	"TV-14",	30,	4.0,	8.8,	73424,      17.617, 8.306)
+INSERT INTO "filmsAndSeries" VALUES ("tm120801",	"The Dirty Dozen"	"MOVIE"	"12 American military prisoners in ..."	      1967, , 	      150,,		  7.7,	72662,	    20.398,	7.6)
+
+
 
 ```
 
 We can also insert values into one table directly from another:
 
 ```sql
-CREATE TABLE "myjournals"(Journal_Title text, ISSNs text);
-INSERT INTO "myjournals" SELECT Journal_Title, ISSNs FROM journals;
+CREATE TABLE "myMovies"(title TEXT, description TEXT, year INTEGER );
+INSERT INTO "myMovies" SELECT title, decription, release_year FROM filmsAndSeries;
 ```
 
 Modifying existing records is done using the `UPDATE` statement.
@@ -94,11 +106,11 @@ To do this we tell the database which table we want to update,
 what we want to change the values to for any or all of the fields,
 and under what conditions we should update the values.
 
-For example, if we made a typo when entering the ISSNs
-of the last `INSERT` statement above, we can correct it with an update:
+For example, we made a typo when entering the type
+of the first `INSERT` statement above, we can correct it with an update:
 
 ```sql
-UPDATE journals SET ISSN-L = 2076-2615, ISSNs = 2076-2615 WHERE id = 3;
+UPDATE filmsAndSeries SET type = "MOVIE", WHERE id = "tm84618";
 ```
 
 Be careful to not forget the `WHERE` clause or the update statement will
@@ -109,32 +121,27 @@ because we have to ensure that the database remains internally consistent.
 If all we care about is a single table,
 we can use the `DELETE` command with a `WHERE` clause
 that matches the records we want to discard.
-We can remove the journal `Animals` from the `journals` table like this:
+We can remove the movie `Deliverance` from the `filmsAndSeries` table like this:
 
 ```sql
-DELETE FROM journals WHERE Journal_Title = 'Animals';
+DELETE FROM filmsAndSeries WHERE title = 'Deliverance';
 ```
 
-But now the article `Early Onset of Laying and Bumblefoot Favor Keel Bone Fractures` from the table `articles`
-has no matching journal anymore.
-That's never supposed to happen:
-Our queries assume there will be a row `ISSNs` in the table 'journals'
-matching every row `ISSNs`in the table `articles`.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Exercise
 
-Write an SQL statement to add the journal "New Journal of Physics" (ISSNs \& ISSNs: 1367-2630; publisher: "Institute of Physics (IOP)") to the table
-`journals`. You need to add the publisher "IOP" to the table  `publishers` as well.
+Write an SQL statement to add the country "Gibraltar" (code: GI) to the table
+`countries`. 
 
 :::::::::::::::  solution
 
 ## Solution
 
 ```sql
-INSERT INTO "publishers" VALUES (7,'Institute of Physics (IOP)');
-INSERT INTO "journals" VALUES (52,'1367-2630','1367-2630',7,'New Journal of Physics');
+
+INSERT INTO "countries" VALUES ("GI", "Gibraltar");
 ```
 
 :::::::::::::::::::::::::
@@ -148,35 +155,10 @@ INSERT INTO "journals" VALUES (52,'1367-2630','1367-2630',7,'New Journal of Phys
 SQLite has several administrative commands that aren't part of the
 SQL standard.  One of them is `.dump`, which prints the SQL commands
 needed to re-create the database.  Another is `.read`, which reads a
-file created by `.dump` and restores the database.  A colleague of
-yours thinks that storing dump files (which are text) in version
-control is a good way to track and manage changes to the database.
-What are the pros and cons of this approach?  (Hint: records aren't
-stored in any particular order.)
-
-:::::::::::::::  solution
-
-## Solution
-
-#### Advantages
-
-- A version control system will be able to show differences between versions
-  of the dump file; something it can't do for binary files like databases
-- A VCS only saves changes between versions, rather than a complete copy of
-  each version (save disk space)
-- The version control log will explain the reason for the changes in each version
-  of the database
-
-#### Disadvantages
-
-- Artificial differences between commits because records don't have a fixed order
-
+file created by `.dump` and restores the database.  
 :::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Adaped from the Software Carpentry Course "Databases and SQL", Chapter 9. 'Creating and Modifying Data'.
-<https://swcarpentry.github.io/sql-novice-survey/09-create>
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
