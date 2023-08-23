@@ -30,9 +30,11 @@ the number of productions from each country in a view, we can write:
 
 ```sql
 CREATE VIEW production_counts AS
-SELECT productionCountry, COUNT(*)
-FROM productionCountry
-GROUP BY productionCountry;
+SELECT countries.country, COUNT(*)
+FROM productionCountries
+JOIN countries
+ON countries.code = productionCountries.Country
+GROUP BY countries.Country;
 ```
 
 Now, we will be able to access these results with a much shorter notation:
@@ -50,7 +52,7 @@ DROP VIEW production_counts;
 
 In DBBrowser for SQLite, you can also create a view from any query by omitting
 the `CREATE VIEW viewname AS` statement and instead, clicking the small Save
-icon at the bottom of the Execute SQL tab and then clicking **Save as view**.
+icon at the top of the Execute SQL tab and then clicking **Save as view**.
 Whatever method you use to create a view, it will appear in the list of views
 under the Database Structure tab.
 
@@ -68,11 +70,13 @@ grouped by the `Country` in `DESC` order.
 
 ```sql
 CREATE VIEW scores_by_country AS
-SELECT productionCountries.Country, AVG(filmsAndSeries.imdb_score) as score
+SELECT countries.country, AVG(filmsAndSeries.imdb_score) as score
 FROM productionCountries
 JOIN filmsAndSeries
-USING id 
-GROUP BY Country
+USING (id)
+JOIN countries
+ON countries.code = productionCountries.Country
+GROUP BY countries.country
 ORDER BY score DESC
 ```
 
