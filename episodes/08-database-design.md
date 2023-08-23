@@ -18,7 +18,7 @@ exercises: 20
 
 ## Spreadsheets
 
-Spreadsheets are often created to keep lists of a variety of things like an inventory of equipment, statistics, or items to review for purchase (See *[What are some of the uses for SQL in libraries?](01-introduction.md)*). Spreadsheets, sometimes referred to as tabular data or flat files, are an easy way to display data organized in columns and rows. Column headers describe the data contained in corresponding columns. Each row is a record (sometimes called an observation) with data about it contained in separate column cells.
+Spreadsheets are often created to keep lists of a variety of things like an inventory of equipment or statistics. Spreadsheets are an easy way to display data organized in columns and rows. Column headers describe the data contained in corresponding columns. Each row is a record (sometimes called an observation) with data about it contained in separate column cells.
 
 Spreadsheets can make data gathering easier but they can also lead to messy data. Over time, if you gather enough data in spreadsheets, you will likely end up with inconsistent data (i.e. misformatted, misspelled data).
 
