@@ -50,7 +50,7 @@ ERDs are helpful tools for visualising and structuring your data more efficientl
 
 *Or you can view the [dbdiagram.io interactive version of the ERD](https://dbdiagram.io/d/5cc32b0cf7c5bb70c72fc530)*
 
-<img src="../fig/DB_diagram.png">
+<img src="/fig/DB_diagram.png">
 
 Relationships between entities and their attributes are represented by lines linking them together. For example, the line linking journals and publishers is interpreted as follows: The 'journals' entity is related to the 'publishers' entity through the attributes 'PublisherId' and 'id' respectively.
 
