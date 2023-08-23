@@ -46,9 +46,7 @@ It is useful to describe on an abstract level the entities we would like to capt
 
 ERDs are helpful tools for visualising and structuring your data more efficiently. They allow you to map relationships between concepts and ultimately construct a relational database. The following is an ERD of the database used in this lesson:
 
-![](https://user-images.githubusercontent.com/30397506/115917162-6cc7ef00-a43b-11eb-97af-16fe50caa6a6.png){alt='Articles Database'}
 
-*Or you can view the [dbdiagram.io interactive version of the ERD](https://dbdiagram.io/d/5cc32b0cf7c5bb70c72fc530)*
 
 ![](fig/DB_diagram.png){alt='Entity relation diagram'}
 
