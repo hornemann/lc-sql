@@ -50,6 +50,8 @@ ERDs are helpful tools for visualising and structuring your data more efficientl
 
 *Or you can view the [dbdiagram.io interactive version of the ERD](https://dbdiagram.io/d/5cc32b0cf7c5bb70c72fc530)*
 
+<img src="../fig/DB_diagram.png">
+
 Relationships between entities and their attributes are represented by lines linking them together. For example, the line linking journals and publishers is interpreted as follows: The 'journals' entity is related to the 'publishers' entity through the attributes 'PublisherId' and 'id' respectively.
 
 Conceptually, we know that a journal has only one publisher but a publisher can publish many journals. This is known as a one-to-many relationship. In modeling relationships, we usually assign a unique identifier to the 'one' side of the relationship and use that same identifier to refer to that entity on the 'many' side. In 'publishers' table, the 'id' attribute is that unique identifier. We use that same identifier in the 'journals' table to refer to an individual publisher. That way, there is an unambiguous way for us to distinguish which journals are associated with which publisher in a way that keeps the integrity of the data (see the Normalization section below).
