@@ -84,10 +84,10 @@ Here is an example of inserting rows into the `filmsAndSeries` table:
 
 ```sql
 
-INSERT INTO "filmsAndSeries" VALUES ("tm84618",  "Taxi Driver",	"MVIE",	"A mentally unstable Vietnam War...",	        1976,	"R",	    114,,	    8.2,	808582,     40.965,	8.179)
-INSERT INTO "filmsAndSeries" VALUES ("tm154986",	"Deliverance",	"MOVIE",	"Intent on seeing the Cahulawassee...",	      1972,	"R"	      109,,	    7.7,	107673,     10.01,	7.3)
-INSERT INTO "filmsAndSeries" VALUES ("ts22164",  "Monty Python's Flying Circus",	"SHOW",	"A British sketch comedy...",	  1969,	"TV-14",	30,	4.0,	8.8,	73424,      17.617, 8.306)
-INSERT INTO "filmsAndSeries" VALUES ("tm120801",	"The Dirty Dozen"	"MOVIE"	"12 American military prisoners in ..."	      1967, , 	      150,,		  7.7,	72662,	    20.398,	7.6)
+INSERT INTO "filmsAndSeries" VALUES ("tm84618",  "Taxi Driver",  "MVIE",	"A mentally unstable Vietnam War...",	        1976,	"R",	    114,,	    8.2,	808582,     40.965,	8.179)
+INSERT INTO "filmsAndSeries" VALUES ("tm154986",  "Deliverance",  "MOVIE",	"Intent on seeing the Cahulawassee...",	      1972,	"R"	      109,,	    7.7,	107673,     10.01,	7.3)
+INSERT INTO "filmsAndSeries" VALUES ("ts22164",  "Monty Python's Flying Circus",  "SHOW",	"A British sketch comedy...",	  1969,	"TV-14",	30,	4.0,	8.8,	73424,      17.617, 8.306)
+INSERT INTO "filmsAndSeries" VALUES ("tm120801",  "The Dirty Dozen",	"MOVIE",	"12 American military prisoners in ...",	      1967, , 	      150,,		  7.7,	72662,	    20.398,	7.6)
 
 
 
