@@ -93,26 +93,26 @@ The data we will be using consists 4 tables of movie or series titles.
 **filmsAndSeries**
 
 - Contains titles and metadataon movies and series from IMDB
-- (13 fields, 5850 records)
-- Field names: "id" , "title", "type", "description", "release_year", "age_certification", "runtime", "seasons", "imdb_id", "imdb_score", "imdb_votes", "tmdb_popularity", "tmdb_score"
-
-**certification**
-
-- Contains the various certification types.
-- (2 fields, 12 records)
-- Field names: `id`, `certification`
+- (12 fields, 5850 records)
+- Field names: "id" , "title", "type", "description", "release_year", "age_certification", "runtime", "seasons", "imdb_score", "imdb_votes", "tmdb_popularity", "tmdb_score"
 
 **productionCountries**
 
 - country table which associates country codes with netflixid. 
-- (2 fields, 94 records)
-- Field names: `NetflixId`, `production_country`
+- (2 fields, 6528 records)
+- Field names: `id`, `Country`
 
-**types**
+**genres**
 
 - Table which associates genres with id numbers. 
-- (2 fields, 207 records)
-- Field names: `NetflixId`, `Genre`
+- (2 fields, 15080 records)
+- Field names: `id`, `genre`
+
+**countries**
+
+- Table which associates a country name with a country code
+- (2 fields, 248 records)
+- Field names: code, country
 
 
 
