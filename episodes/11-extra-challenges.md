@@ -28,17 +28,18 @@ Also, if you would like to learn more SQL concepts and try additional challenges
 
 ## Challenge 1
 
-How many `articles` are there from each `First_author`? Can you make an alias for the number of articles? Can you order the results by articles?
-
+How many series  are there for each `genre`? 
 :::::::::::::::  solution
 
 ## Solution 1
 
 ```sql
-SELECT First_Author, COUNT( * ) AS n_articles
-FROM articles
-GROUP BY First_Author
-ORDER BY n_articles DESC;
+SELECT genre, COUNT( * )
+FROM genres
+JOIN filmsAndSeries
+USING (id)
+WHERE type = "SHOW"
+GROUP BY genre;
 ```
 
 :::::::::::::::::::::::::
@@ -49,16 +50,18 @@ ORDER BY n_articles DESC;
 
 ## Challenge 2
 
-How many papers have a single author? How many have 2 authors? How many 3? etc?
+How many shows ran for only one season? How many ran for 2 seasons? How many 3? etc?
 
 :::::::::::::::  solution
 
 ## Solution 2
 
 ```sql
-SELECT Author_Count, COUNT( * )
-FROM articles
-GROUP BY Author_Count;
+SELECT seasons, COUNT( * )
+FROM filmsAndSeries
+WHERE type = "SHOW"
+GROUP BY seasons
+
 ```
 
 :::::::::::::::::::::::::
@@ -69,20 +72,19 @@ GROUP BY Author_Count;
 
 ## Challenge 3
 
-How many articles are published for each `Language`? Ignore articles where
-language is unknown.
+How many movies or shows are there from each `country`? Can you make an alias for the number of movies? Can you order the results by number of movies?
 
 :::::::::::::::  solution
 
 ## Solution 3
 
 ```sql
-SELECT Language, COUNT( * )
-FROM articles
-JOIN languages
-ON articles.LanguageId=languages.id
-WHERE Language != ''
-GROUP BY Language;
+SELECT countries.country, COUNT( * ) AS n_movies
+FROM productionCountries
+JOIN countries
+ON countries.code = productionCountries.country
+GROUP BY productionCountries.country
+ORDER BY n_movies DESC;
 ```
 
 :::::::::::::::::::::::::
@@ -93,19 +95,16 @@ GROUP BY Language;
 
 ## Challenge 4
 
-How many articles are published for each `Licence` type, and what is the average
-number of citations for that `Licence` type?
+How many titles are there for each `age_certification` type, and what is the average
+imdb_score for that `age_certification` type?
 
 :::::::::::::::  solution
 
 ## Solution 4
 
 ```sql
-SELECT Licence, AVG( Citation_Count ), COUNT( * )
-FROM articles
-JOIN licences
-ON articles.LicenceId=licences.id
-WHERE Licence != ''
+SELECT age_certification, AVG( imdb_score ), COUNT( * )
+FROM filmsAndSeries
 GROUP BY Licence;
 ```
 
