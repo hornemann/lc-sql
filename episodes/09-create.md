@@ -34,8 +34,7 @@ the following statement creates the table `filmsAndSeries`:
 
 ```sql
 
-CREATE TABLE "filmsAndSeries" (	"id"	TEXT,	"title"	TEXT,	"type"	TEXT,	"description"	TEXT,	"release_year"	INTEGER,	"age_certification"	TEXT,	"runtime"	INTEGER,	"seasons"	TEXT,	"imdb_score"	REAL,
-  "imdb_votes"	INTEGER,	"tmdb_popularity"	REAL,	"tmdb_score"	REAL)
+CREATE TABLE "filmsAndSeries" (	"id" TEXT, "title" TEXT, "type" TEXT, "description" TEXT, "release_year" INTEGER, "age_certification" TEXT, "runtime" INTEGER, "seasons" TEXT, "imdb_score" REAL, "imdb_votes" INTEGER, "tmdb_popularity" REAL, "tmdb_score" REAL)
 ```
 
 We can get rid of one of our tables using:
