@@ -103,19 +103,21 @@ ON productionCountries.id = genres.id;
 ## Challenge:
 
 Write a query that returns the `title`, number of
-production countries, ordered by number of production countries in descending order.
+production countries, number of genres, ordered by number of production countries in descending order.
 
 :::::::::::::::  solution
 
 ## Solution
 
 ```sql
-SELECT filmsAndSeries.title, COUNT(Country)
+SELECT filmsAndSeries.title, COUNT(DISTINCT productionCountries.Country), COUNT(DISTINCT genres.genre)
 FROM filmsAndSeries
 JOIN productionCountries
-USING id
+USING (id)
+JOIN genres
+USING (id)
 GROUP BY title
-ORDER BY COUNT(country) DESC;
+ORDER BY COUNT(DISTINCT Country) DESC;
 ```
 
 :::::::::::::::::::::::::
