@@ -34,18 +34,19 @@ In section two, we talked about SQL keywords/commands being case-insensitive ("W
 As you may have noticed, we are able to write our query on one line, or on many. The general consensus with SQL is that if you can break it into components on multiple lines, it becomes easier to read. Using multiple lines and indenting, you can turn something that looks like this:
 
 ```sql
-SELECT articles.Title, articles.First_Author, journals.Journal_Title, publishers.Publisher FROM articles JOIN journals ON articles.ISSNs = journals.ISSNs JOIN publishers ON publishers.id = journals.PublisherId;
+SELECT countries.Country C, filmsAndSeries.title FROM filmsAndSeries JOIN productionCountries USING (id) JOIN countries ON productionCountries.country = countries.code ORDER BY C
 ```
 
 Into something that looks like this:
 
 ```sql
-SELECT articles.Title, articles.First_Author, journals.Journal_Title, publishers.Publisher
-FROM articles
-JOIN journals
-ON articles.ISSNs = journals.ISSNs
-JOIN publishers
-ON publishers.id = journals.PublisherId;
+SELECT countries.Country C, filmsAndSeries.title
+FROM filmsAndSeries
+JOIN productionCountries
+USING (id)
+JOIN countries
+ON productionCountries.country = countries.code
+ORDER BY C
 ```
 
 In some programs (such as MySQL), there will be tools that can automatically "beautify" your code for better readability.
