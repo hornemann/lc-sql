@@ -112,28 +112,7 @@ GROUP BY Licence;
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::  challenge
 
-## Challenge 5
-
-Write a query that returns `Title, First_Author, Author_Count, Citation_Count, Month, Year, Journal_Title and Publisher` for articles in the database.
-
-:::::::::::::::  solution
-
-## Solution 5
-
-```sql
-SELECT Title, First_Author, Author_Count, Citation_Count, Month, Year, Journal_Title, Publisher
-FROM articles
-JOIN journals
-ON articles.issns=journals.ISSNs
-JOIN publishers
-ON publishers.id=journals.PublisherId;
-```
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
